@@ -1,5 +1,5 @@
 #include <SPI.h>
-#include <NanoShield_Mrf24j40.h>
+#include <Nanoshield_Mrf24j40.h>
 
 // Defines if the module is the base or the terminal
 #define BASE true
@@ -41,7 +41,7 @@ int packetsReceived = 0;
 unsigned long rssiSum = 0;
 unsigned long lqiSum = 0;
 
-NanoShield_Mrf24j40 mrf(pin_reset, pin_cs, pin_interrupt);
+Nanoshield_Mrf24j40 mrf(pin_reset, pin_cs, pin_interrupt);
 
 void setup() {
   word addr;

@@ -164,13 +164,19 @@ typedef struct _tx_info_t{
     uint8_t channel_busy:1;
 } tx_info_t;
 
-class Mrf24j
+class Nanoshield_Mrf24j40
 {
     public:
-        Mrf24j(int pin_cs);
+		#ifdef RASPBERRY
+        Nanoshield_Mrf24j40(int pin_cs);
+		#else
+		Nanoshield_Mrf24j40(int pin_reset, int pin_chip_select, int pin_interrupt);
+		#endif
         void reset(void);
         void init(void);
-	void begin(void);
+		#ifdef RASPBERRY
+		void begin(void);
+		#endif
         byte read_short(byte address);
         byte read_long(word address);
 
