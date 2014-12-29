@@ -1,11 +1,23 @@
+/**
+ * Tests the communication link between two MRF24J40 modules (base and node).
+ *
+ * You must program one module with the constant BASE = true and the other with BASE = false.
+ * Make sure to set the PA_LNA constant to false if you are using a MRF24J40A module or
+ * to false if you are using, MRF24J40B, MRF24J40C and MRF24J40D.
+ *
+ * Copyright (c) 2014 Circuitar
+ * All rights reserved.
+ *
+ * This software is released under a BSD license. See the attached LICENSE file for details.
+ */
 #include <SPI.h>
-#include <Nanoshield_Mrf24j40.h>
+#include <Nanoshield_MRF24J40.h>
 
-// Defines if the module is the base or the terminal
-#define BASE true
+// Defines if the module is the base or the node
+#define BASE false
 
 // Defines if PA/LNA control is activated
-#define PA_LNA true
+#define PA_LNA false
 
 // Pin definitions
 const int pin_reset = A2;
@@ -41,12 +53,12 @@ int packetsReceived = 0;
 unsigned long rssiSum = 0;
 unsigned long lqiSum = 0;
 
-Nanoshield_Mrf24j40 mrf(pin_reset, pin_cs, pin_interrupt);
+Nanoshield_MRF24J40 mrf(pin_reset, pin_cs, pin_interrupt);
 
 void setup() {
   word addr;
   
-  Serial.begin(115200);
+  Serial.begin(9600);
   
   delay(1000);
 
@@ -68,7 +80,7 @@ void setup() {
   }
 
   // Configure PA_LNA control
-  //mrf.set_palna(PA_LNA);
+  mrf.set_palna(PA_LNA);
   
   // Try to write and then read back the PAN ID
   mrf.set_pan(panId);

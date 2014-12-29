@@ -1,0 +1,36 @@
+# Datatypes (KEYWORD1)
+Nanoshield_MRF24J40 KEYWORD1
+rx_info_t KEYWORD1
+tx_info_t KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+reset KEYWORD2
+init KEYWORD2
+begin KEYWORD2
+read_short KEYWORD2
+read_long KEYWORD2
+write_short KEYWORD2
+write_long KEYWORD2
+get_pan KEYWORD2
+set_pan KEYWORD2
+address16_write KEYWORD2
+address16_read KEYWORD2
+set_interrupts KEYWORD2
+set_promiscuous KEYWORD2
+set_channel KEYWORD2
+rx_enable KEYWORD2
+rx_disable KEYWORD2
+rx_flush KEYWORD2
+get_rxinfo KEYWORD2
+get_txinfo KEYWORD2
+get_rxbuf KEYWORD2
+rx_datalength KEYWORD2
+set_ignoreBytes KEYWORD2
+set_bufferPHY KEYWORD2
+get_bufferPHY KEYWORD2
+set_palna KEYWORD2
+send16 KEYWORD2
+interrupt_handler KEYWORD2
+check_flags KEYWORD2
+
+# Constants (LITERAL1)

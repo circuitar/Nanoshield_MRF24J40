@@ -1,19 +1,23 @@
-/*
- * File:   Nanoshield_mrf24j40.h
- * copyright Karl Palsson, karlp@tweak.net.au, 2011
- * modified BSD License / apache license
+/**
+ * This is the library to use the MRF24J40 Nanoshield.
+ *
+ * This library is based on the [Mrf24j40-arduino-library](https://github.com/karlp/Mrf24j40-arduino-library) from Karl Palsson.
+ *
+ * Original work Copyright (c) 2012, Karl Palsson (karlp@tweak.net.au)
+ * Modified work Copyright (c) 2014 Circuitar
+ * All rights reserved.
+ *
+ * This software is released under a BSD license. See the attached LICENSE file for details.
  */
+#ifndef NANOSHIELD_MRF24J40_H
+#define NANOSHIELD_MRF24J40_H
 
-#ifndef LIB_NANOSHIELD_MRF24J40_H
-#define LIB_NANOSHIELD_MRF24J40_H
-
-#ifdef RASPBERRY
+#ifdef ARDUPI
 	#include "arduPi.h"
 #else
 	#include "Arduino.h"
 	#include "SPI.h"
 #endif
-
 
 #define MRF_RXMCR 0x00
 #define MRF_PANIDL 0x01
@@ -164,78 +168,78 @@ typedef struct _tx_info_t{
     uint8_t channel_busy:1;
 } tx_info_t;
 
-class Nanoshield_Mrf24j40
+class Nanoshield_MRF24J40
 {
-    public:
-		#ifdef RASPBERRY
-        Nanoshield_Mrf24j40(int pin_cs);
-		#else
-		Nanoshield_Mrf24j40(int pin_reset, int pin_chip_select, int pin_interrupt);
-		#endif
-        void reset(void);
-        void init(void);
-		#ifdef RASPBERRY
+  public:
+#ifdef ARDUPI
+    Nanoshield_MRF24J40(int pin_cs);
+#else
+		Nanoshield_MRF24J40(int pin_reset, int pin_chip_select, int pin_interrupt);
+#endif
+    void reset(void);
+    void init(void);
+#ifdef ARDUPI
 		void begin(void);
-		#endif
-        byte read_short(byte address);
-        byte read_long(word address);
+#endif
+    byte read_short(byte address);
+    byte read_long(word address);
 
-        void write_short(byte address, byte data);
-        void write_long(word address, byte data);
+    void write_short(byte address, byte data);
+    void write_long(word address, byte data);
 
-        word get_pan(void);
-        void set_pan(word panid);
+    word get_pan(void);
+    void set_pan(word panid);
 
-        void address16_write(word address16);
-        word address16_read(void);
+    void address16_write(word address16);
+    word address16_read(void);
 
-        void set_interrupts(void);
+    void set_interrupts(void);
 
-        void set_promiscuous(boolean enabled);
+    void set_promiscuous(boolean enabled);
 
-        /**
-         * Set the channel, using 802.15.4 channel numbers (11..26)
-         */
-        void set_channel(byte channel);
+    /**
+      * Set the channel, using 802.15.4 channel numbers (11..26)
+      */
+    void set_channel(byte channel);
 
-        void rx_enable(void);
-        void rx_disable(void);
+    void rx_enable(void);
+    void rx_disable(void);
 
-        /** If you want to throw away rx data */
-        void rx_flush(void);
+    /** If you want to throw away rx data */
+    void rx_flush(void);
 
-        rx_info_t * get_rxinfo(void);
+    rx_info_t * get_rxinfo(void);
 
-        tx_info_t * get_txinfo(void);
+    tx_info_t * get_txinfo(void);
 
-        uint8_t * get_rxbuf(void);
+    uint8_t * get_rxbuf(void);
 
-        int rx_datalength(void);
+    int rx_datalength(void);
 
-        void set_ignoreBytes(int ib);
+    void set_ignoreBytes(int ib);
 
-        /**
-         * Set bufPHY flag to buffer all bytes in PHY Payload, or not
-         */
-        void set_bufferPHY(boolean bp);
+    /**
+      * Set bufPHY flag to buffer all bytes in PHY Payload, or not
+      */
+    void set_bufferPHY(boolean bp);
 
-        boolean get_bufferPHY(void);
+    boolean get_bufferPHY(void);
 
-        /**
-         * Set PA/LNA external control
-         */
-        void set_palna(boolean enabled);
+    /**
+      * Set PA/LNA external control
+      */
+    void set_palna(boolean enabled);
 
-        void send16(word dest16, char * data);
+    void send16(word dest16, char * data);
 
-        void interrupt_handler(void);
+    void interrupt_handler(void);
 
-        void check_flags(void (*rx_handler)(void), void (*tx_handler)(void));
+    void check_flags(void (*rx_handler)(void), void (*tx_handler)(void));
 
-    private:
-        int _pin_reset;
-        int _pin_cs;
-        int _pin_int;
+  private:
+    int _pin_reset;
+    int _pin_cs;
+    int _pin_int;
 };
 
 #endif  /* LIB_MRF24J_H */
