@@ -30,41 +30,14 @@ static rx_info_t rx_info;
 static tx_info_t tx_info;
 
 /**
- * Constructor Nanoshield_Mrf24j40 Object.
- * @param pin_reset, @param pin_chip_select, @param pin_interrupt
+ * Constructor for Nanoshield_Mrf24j40 Object.
  */
-#ifdef ARDUPI
-Nanoshield_MRF24J40::Nanoshield_MRF24J40(int cs_pin) {
-  _pin_cs =  cs_pin;
-}
-
-void Nanoshield_MRF24J40::begin(void){
-  pinMode(_pin_cs,OUTPUT);
-  SPI.setBitOrder(MSBFIRST) ;
-  SPI.setDataMode(SPI_MODE0);
-  SPI.begin();
-}
-#else
-Nanoshield_MRF24J40::Nanoshield_MRF24J40(int pin_reset, int pin_chip_select, int pin_interrupt) {
-  _pin_reset = pin_reset;
-  _pin_cs = pin_chip_select;
-  _pin_int = pin_interrupt;
-
-  pinMode(_pin_reset, OUTPUT);
+Nanoshield_MRF24J40::Nanoshield_MRF24J40() {
+  _pin_cs = A3;
   pinMode(_pin_cs, OUTPUT);
-  pinMode(_pin_int, INPUT);
-
   SPI.setBitOrder(MSBFIRST) ;
   SPI.setDataMode(SPI_MODE0);
   SPI.begin();
-}
-#endif
-
-void Nanoshield_MRF24J40::reset(void) {
-  digitalWrite(_pin_reset, LOW);
-  delay(10);  // just my gut
-  digitalWrite(_pin_reset, HIGH);
-  delay(20);  // from manual
 }
 
 byte Nanoshield_MRF24J40::read_short(byte address) {

@@ -3,7 +3,7 @@
  *
  * You must program one module with the constant BASE = true and the other with BASE = false.
  * Make sure to set the PA_LNA constant to false if you are using a MRF24J40A module or
- * to false if you are using, MRF24J40B, MRF24J40C and MRF24J40D.
+ * to true if you are using, MRF24J40B, MRF24J40C and MRF24J40D.
  *
  * Copyright (c) 2014 Circuitar
  * All rights reserved.
@@ -18,11 +18,6 @@
 
 // Defines if PA/LNA control is activated
 #define PA_LNA false
-
-// Pin definitions
-const int pin_reset = A2;
-const int pin_cs = A3;
-const int pin_interrupt = 3;
 
 // Network addresses
 word panId = 0xcafe;
@@ -53,7 +48,7 @@ int packetsReceived = 0;
 unsigned long rssiSum = 0;
 unsigned long lqiSum = 0;
 
-Nanoshield_MRF24J40 mrf(pin_reset, pin_cs, pin_interrupt);
+Nanoshield_MRF24J40 mrf;
 
 void setup() {
   word addr;

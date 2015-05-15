@@ -171,16 +171,9 @@ typedef struct _tx_info_t{
 class Nanoshield_MRF24J40
 {
   public:
-#ifdef ARDUPI
-    Nanoshield_MRF24J40(int pin_cs);
-#else
-		Nanoshield_MRF24J40(int pin_reset, int pin_chip_select, int pin_interrupt);
-#endif
-    void reset(void);
+    Nanoshield_MRF24J40();
     void init(void);
-#ifdef ARDUPI
-		void begin(void);
-#endif
+
     byte read_short(byte address);
     byte read_long(word address);
 
