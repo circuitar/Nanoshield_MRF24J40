@@ -1,6 +1,8 @@
 Nanoshield_MRF24J40
 ===================
 
+**This library is obsolete. Please use [Nanoshield_MRF](https://github.com/circuitar/Nanoshield_MRF) instead.**
+
 This is the Arduino software library to access the MRF24J40 Nanoshield and communicate using the 802.15.4 wireless protocol.
 
 The following features are provided:
